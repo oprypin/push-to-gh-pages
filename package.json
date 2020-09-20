@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peaceiris/actions-gh-pages.git"
+    "url": "git+https://github.com/oprypin/push-to-gh-pages.git"
   },
   "keywords": [
     "GitHub Actions",
@@ -50,9 +50,9 @@
   "author": "peaceiris",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/peaceiris/actions-gh-pages/issues"
+    "url": "https://github.com/oprypin/push-to-gh-pages/issues"
   },
-  "homepage": "https://github.com/peaceiris/actions-gh-pages#readme",
+  "homepage": "https://github.com/oprypin/push-to-gh-pages#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
     "@actions/exec": "^1.0.4",

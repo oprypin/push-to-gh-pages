@@ -1,9 +1,9 @@
-[![license](https://img.shields.io/github/license/peaceiris/actions-gh-pages.svg)](https://github.com/peaceiris/actions-gh-pages/blob/main/LICENSE)
-[![release](https://img.shields.io/github/release/peaceiris/actions-gh-pages.svg)](https://github.com/peaceiris/actions-gh-pages/releases/latest)
-[![GitHub release date](https://img.shields.io/github/release-date/peaceiris/actions-gh-pages.svg)](https://github.com/peaceiris/actions-gh-pages/releases)
-![Test](https://github.com/peaceiris/actions-gh-pages/workflows/Test/badge.svg?branch=main&event=push)
-![Code Scanning](https://github.com/peaceiris/actions-gh-pages/workflows/Code%20Scanning/badge.svg?event=push)
-[![CodeFactor](https://www.codefactor.io/repository/github/peaceiris/actions-gh-pages/badge)](https://www.codefactor.io/repository/github/peaceiris/actions-gh-pages)
+[![license](https://img.shields.io/github/license/oprypin/push-to-gh-pages.svg)](https://github.com/oprypin/push-to-gh-pages/blob/main/LICENSE)
+[![release](https://img.shields.io/github/release/oprypin/push-to-gh-pages.svg)](https://github.com/oprypin/push-to-gh-pages/releases/latest)
+[![GitHub release date](https://img.shields.io/github/release-date/oprypin/push-to-gh-pages.svg)](https://github.com/oprypin/push-to-gh-pages/releases)
+![Test](https://github.com/oprypin/push-to-gh-pages/workflows/Test/badge.svg?branch=main&event=push)
+![Code Scanning](https://github.com/oprypin/push-to-gh-pages/workflows/Code%20Scanning/badge.svg?event=push)
+[![CodeFactor](https://www.codefactor.io/repository/github/oprypin/push-to-gh-pages/badge)](https://www.codefactor.io/repository/github/oprypin/push-to-gh-pages)
 
 <img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="./images/ogp.svg">
 
@@ -21,7 +21,7 @@ The next example step will deploy `./public` directory to the remote `gh-pages` 
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -144,7 +144,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -170,7 +170,7 @@ GitHub Actions runner automatically creates a `GITHUB_TOKEN` secret to use in yo
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -184,7 +184,7 @@ Read [Create SSH Deploy Key](#%EF%B8%8F-create-ssh-deploy-key), create your SSH 
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
     publish_dir: ./public
@@ -196,7 +196,7 @@ Read [Create SSH Deploy Key](#%EF%B8%8F-create-ssh-deploy-key), create your SSH 
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     personal_token: ${{ secrets.PERSONAL_TOKEN }}
     publish_dir: ./public
@@ -209,7 +209,7 @@ The default is `gh-pages`.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_branch: your-branch  # default: gh-pages
@@ -221,7 +221,7 @@ A source directory to deploy to GitHub Pages. The default is `public`.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./out  # default: public
@@ -236,7 +236,7 @@ A destination subdirectory on a publishing branch. The default is empty.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3.7.0-8
+  uses: oprypin/push-to-gh-pages@v3.7.0-8
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     destination_dir: subdir
@@ -253,7 +253,7 @@ Values should be split with a comma.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3.7.0-8
+  uses: oprypin/push-to-gh-pages@v3.7.0-8
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     exclude_assets: '.github,exclude-file1,exclude-file2'
@@ -263,7 +263,7 @@ Set `exclude_assets` to empty for including the `.github` directory to deploymen
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3.7.0-8
+  uses: oprypin/push-to-gh-pages@v3.7.0-8
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     exclude_assets: ''
@@ -273,7 +273,7 @@ The `exclude_assets` option supports glob patterns.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3.7.0-8
+  uses: oprypin/push-to-gh-pages@v3.7.0-8
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     exclude_assets: '.github,exclude-file.txt,exclude-dir/**.txt'
@@ -287,7 +287,7 @@ For more details about `CNAME`, read the official documentation: [Managing a cus
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -298,7 +298,7 @@ For more details about `CNAME`, read the official documentation: [Managing a cus
 
 If you want GitHub Pages to process your site with the static site generator Jekyll, set `enable_jekyll` to true.
 
-[github/personal-website](https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-githubpersonal-website) is one of the examples using GitHub Pages built-in Jekyll.
+[github/personal-website](https://github.com/oprypin/push-to-gh-pages#%EF%B8%8F-githubpersonal-website) is one of the examples using GitHub Pages built-in Jekyll.
 
 By default, this action signals to GitHub Pages that the site shall not be processed with Jekyll. This is done by adding an empty `.nojekyll` file when publishing to the master or gh-pages branch. When a `.nojekyll` file already exists, this action does nothing.
 
@@ -307,7 +307,7 @@ Bypassing Jekyll makes the deployment faster and is necessary if you are deployi
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -324,7 +324,7 @@ For example:
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -339,7 +339,7 @@ For example:
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -358,7 +358,7 @@ For example:
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
     external_repository: username/external-repository
@@ -385,7 +385,7 @@ This allows you to make your publish branch with only the latest commit.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -399,7 +399,7 @@ A commit is always created with the same user.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -416,7 +416,7 @@ When we create a commit with a message `docs: Update some post`, a deployment co
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -430,7 +430,7 @@ use the `full_commit_message` option instead of the `commit_message` option.
 
 ```yaml
 - name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
+  uses: oprypin/push-to-gh-pages@v3
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     publish_dir: ./public
@@ -468,7 +468,7 @@ jobs:
           echo "::set-output name=deploy_tag_name::deploy-${TAG_NAME}"
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -539,7 +539,7 @@ The `GITHUB_TOKEN` has limitations for the first deployment so we have to select
 We recommend you to use the latest and specific release of this action for stable CI/CD.
 It is useful to watch this repository (release only) to check the [latest release] of this action.
 
-[latest release]: https://github.com/peaceiris/actions-gh-pages/releases
+[latest release]: https://github.com/oprypin/push-to-gh-pages/releases
 
 For continuous updating, we can use the GitHub native Dependabot.
 Here is an example configuration of the bot. The config file is located in `.github/dependabot.yml`.
@@ -635,7 +635,7 @@ jobs:
       - run: npm run build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -681,7 +681,7 @@ jobs:
       - run: npm run build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -732,7 +732,7 @@ jobs:
       - run: yarn export
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
@@ -779,7 +779,7 @@ jobs:
       - run: npm run generate
 
       - name: deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
@@ -834,7 +834,7 @@ jobs:
       - run: yarn build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
@@ -892,7 +892,7 @@ jobs:
       - run: mkdocs build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
@@ -929,7 +929,7 @@ jobs:
       - run: mdbook build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./book
@@ -969,7 +969,7 @@ jobs:
         run: flutter build web
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
@@ -1014,7 +1014,7 @@ jobs:
         # provide --output=<output-file> option for `elm make` and remove this step
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -1042,7 +1042,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
@@ -1082,7 +1082,7 @@ jobs:
       - run: publish-cli generate
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: oprypin/push-to-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./Output
@@ -1096,9 +1096,9 @@ jobs:
 
 ## License
 
-- [MIT License - peaceiris/actions-gh-pages]
+- [MIT License - oprypin/push-to-gh-pages]
 
-[MIT License - peaceiris/actions-gh-pages]: https://github.com/peaceiris/actions-gh-pages/blob/main/LICENSE
+[MIT License - oprypin/push-to-gh-pages]: https://github.com/oprypin/push-to-gh-pages/blob/main/LICENSE
 
 
 
