@@ -11,7 +11,8 @@ sed -i -E -e 's/"version": ".+",/"version": "'"$1"'",/' package.json
 git diff --quiet && false
 rm -rf node_modules
 npm install --production
-git add -f node_modules package.json package-lock.json
+npm run tsc
+git add -f lib node_modules package.json package-lock.json
 git diff --quiet
 git commit -m "v$1"
 git tag "v$1"
