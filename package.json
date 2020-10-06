@@ -53,7 +53,7 @@
   },
   "homepage": "https://github.com/oprypin/push-to-gh-pages#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5",
+    "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/github": "^4.0.0",
     "@actions/glob": "^0.1.0",
@@ -67,17 +67,17 @@
     "@typescript-eslint/parser": "^2.34.0",
     "@vercel/ncc": "^0.24.1",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-jest": "^24.0.1",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
-    "jest": "^26.4.2",
-    "jest-circus": "^26.4.2",
+    "jest": "^26.5.0",
+    "jest-circus": "^26.5.1",
     "js-yaml": "^3.14.0",
     "lint-staged": "^10.4.0",
     "prettier": "2.1.2",
     "standard-version": "^9.0.0",
-    "ts-jest": "^26.3.0",
-    "typescript": "^4.0.2"
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
   }
 }
