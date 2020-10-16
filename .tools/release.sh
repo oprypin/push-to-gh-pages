@@ -15,5 +15,5 @@ npm run tsc
 git add -f lib node_modules package.json package-lock.json
 git diff --quiet
 git commit -m "v$1"
-git tag "v$1"
+git tag -a -m "" "v$1"
 echo git push origin main v3 --tags
