@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 rm -rf node_modules
 git checkout v3
@@ -15,5 +15,5 @@ npm run tsc
 git add -f lib node_modules package.json package-lock.json
 git diff --quiet
 git commit -m "v$1"
-git tag "v$1"
+git tag -a -m "" "v$1"
 echo git push origin main v3 --tags

@@ -1,11 +1,11 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
-import * as io from '@actions/io';
 import * as glob from '@actions/glob';
 import path from 'path';
 import fs from 'fs';
 import {Inputs, CmdResult} from './interfaces';
 import {createDir} from './utils';
+import {cp, rm} from 'shelljs';
 
 export async function createBranchForce(branch: string): Promise<void> {
   await exec.exec('git', ['init']);
@@ -14,6 +14,7 @@ export async function createBranchForce(branch: string): Promise<void> {
 }
 
 export async function deleteExcludedAssets(destDir: string, excludeAssets: string): Promise<void> {
+  if (excludeAssets === '') return;
   core.info(`[INFO] delete excluded assets`);
   const excludedAssetNames: Array<string> = excludeAssets.split(',');
   const excludedAssetPaths = ((): Array<string> => {
@@ -24,10 +25,11 @@ export async function deleteExcludedAssets(destDir: string, excludeAssets: strin
     return paths;
   })();
   const globber = await glob.create(excludedAssetPaths.join('\n'));
-  for await (const asset of globber.globGenerator()) {
-    core.info(`[INFO] delete ${asset}`);
-    io.rmRF(asset);
+  const files = await globber.glob();
+  for await (const file of globber.globGenerator()) {
+    core.info(`[INFO] delete ${file}`);
   }
+  rm('-rf', files);
   return;
 }
 
@@ -37,23 +39,20 @@ export async function copyAssets(
   excludeAssets: string
 ): Promise<void> {
   core.info(`[INFO] prepare publishing assets`);
-  const copyOpts = {recursive: true, force: true};
-  const files = fs.readdirSync(publishDir);
-  core.debug(`${files}`);
-  for await (const file of files) {
-    if (file === '.git') {
-      core.info(`[INFO] skip ${file}`);
-      continue;
-    }
-    const filePublishPath = path.join(publishDir, file);
-    const fileDestPath = path.join(destDir, file);
-    const destPath = path.dirname(fileDestPath);
-    if (fs.existsSync(destPath) === false) {
-      await createDir(destPath);
-    }
-    core.info(`[INFO] copy ${file}`);
-    await io.cp(filePublishPath, fileDestPath, copyOpts);
+
+  if (!fs.existsSync(destDir)) {
+    core.info(`[INFO] create ${destDir}`);
+    await createDir(destDir);
   }
+
+  const dotGitPath = path.join(publishDir, '.git');
+  if (fs.existsSync(dotGitPath)) {
+    core.info(`[INFO] delete ${dotGitPath}`);
+    rm('-rf', dotGitPath);
+  }
+
+  core.info(`[INFO] copy ${publishDir} to ${destDir}`);
+  cp('-RfL', [`${publishDir}/*`, `${publishDir}/.*`], destDir);
 
   await deleteExcludedAssets(destDir, excludeAssets);
 

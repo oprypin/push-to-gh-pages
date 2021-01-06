@@ -1,15 +1,13 @@
+## GitHub Actions for GitHub Pages
+
+<img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="./images/ogp.svg">
+
 [![license](https://img.shields.io/github/license/oprypin/push-to-gh-pages.svg)](https://github.com/oprypin/push-to-gh-pages/blob/main/LICENSE)
 [![release](https://img.shields.io/github/release/oprypin/push-to-gh-pages.svg)](https://github.com/oprypin/push-to-gh-pages/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/oprypin/push-to-gh-pages.svg)](https://github.com/oprypin/push-to-gh-pages/releases)
 ![Test](https://github.com/oprypin/push-to-gh-pages/workflows/Test/badge.svg?branch=main&event=push)
 ![Code Scanning](https://github.com/oprypin/push-to-gh-pages/workflows/Code%20Scanning/badge.svg?event=push)
 [![CodeFactor](https://www.codefactor.io/repository/github/oprypin/push-to-gh-pages/badge)](https://www.codefactor.io/repository/github/oprypin/push-to-gh-pages)
-
-<img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="./images/ogp.svg">
-
-
-
-## GitHub Actions for GitHub Pages
 
 This is a **GitHub Action** to deploy your static files to **GitHub Pages**.
 This deploy action can be combined simply and freely with [Static Site Generators]. (Hugo, MkDocs, Gatsby, mdBook, Next, Nuxt, and so on.)
@@ -18,13 +16,17 @@ This deploy action can be combined simply and freely with [Static Site Generator
 
 The next example step will deploy `./public` directory to the remote `gh-pages` branch.
 
-
 ```yaml
 - name: Deploy
   uses: oprypin/push-to-gh-pages@v3
   with:
     publish_dir: ./public
 ```
+
+For newbies of GitHub Actions:
+Note that the `GITHUB_TOKEN` is **NOT** a personal access token.
+A GitHub Actions runner automatically creates a `GITHUB_TOKEN` secret to authenticate in your workflow.
+So, you can start to deploy immediately without any configuration.
 
 ### Supported Tokens
 
@@ -39,9 +41,6 @@ Three tokens are supported.
 Notes: Actually, the `GITHUB_TOKEN` works for deploying to GitHub Pages but it has still some limitations.
 For the first deployment, we need to select the `gh-pages` branch or another branch on the repository settings tab.
 See [First Deployment with `GITHUB_TOKEN`](#%EF%B8%8F-first-deployment-with-github_token)
-
-And you may need to push manually for the first deployment on a private repository.
-See [Issue #349](https://github.com/peaceiris/actions-gh-pages/issues/349)
 
 ### Supported Platforms
 
@@ -63,7 +62,6 @@ All Actions runners: Linux (Ubuntu), macOS, and Windows are supported.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Getting started](#getting-started)
 - [Options](#options)
@@ -137,7 +135,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.74.3'
+          hugo-version: '0.79.1'
 
       - name: Build
         run: hugo --minify
@@ -164,7 +162,7 @@ jobs:
 
 **This option is for `GITHUB_TOKEN`, not a personal access token.**
 
-GitHub Actions runner automatically creates a `GITHUB_TOKEN` secret to use in your workflow. You can use the `GITHUB_TOKEN` to authenticate in a workflow run.
+A GitHub Actions runner automatically creates a `GITHUB_TOKEN` secret to use in your workflow. You can use the `GITHUB_TOKEN` to authenticate in a workflow run.
 
 ```yaml
 - name: Deploy
@@ -322,6 +320,11 @@ For example:
 ### ⭐️ Keeping existing files `keep_files`
 
 By default, existing files in the publish branch are removed before adding the ones from publish dir. If you want the action to add new files but leave existing ones untouched, set the optional parameter `keep_files` to `true`.
+
+Note that users who are using a Static Site Generator do not need this option in most cases. Please reconsider your project structure and building scripts, or use a built-in feature of a Static Site Generator before you enable this flag.
+
+- [Static Files | Hugo](https://gohugo.io/content-management/static-files/)
+- [Using the Static Folder | Gatsby](https://www.gatsbyjs.com/docs/static-folder/)
 
 For example:
 
@@ -577,12 +580,15 @@ jobs:
 
 ### ⭐️ Static Site Generators with Node.js
 
-[hexo], [vuepress], [react-static], [gridsome], and so on.
+[hexo], [vuepress], [react-static], [gridsome], [create-react-app] and so on.
+Please check where your output directory is before pushing your workflow.
+e.g. `create-react-app` requires `publish_dir` to be set to `./build`
 
 [hexo]: https://github.com/hexojs/hexo
 [vuepress]: https://github.com/vuejs/vuepress
 [react-static]: https://github.com/react-static/react-static
 [gridsome]: https://github.com/gridsome/gridsome
+[create-react-app]: https://github.com/facebook/create-react-app
 
 Premise: Dependencies are managed by `package.json` and `package-lock.json`
 
@@ -601,7 +607,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
 
@@ -644,7 +650,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
 
@@ -691,7 +697,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
 
@@ -741,7 +747,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
 
@@ -792,7 +798,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
 
@@ -899,7 +905,7 @@ jobs:
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1
         with:
-          mdbook-version: '0.3.7'
+          mdbook-version: '0.4.5'
           # mdbook-version: 'latest'
 
       - run: mdbook build
@@ -933,7 +939,7 @@ jobs:
       - name: Setup Flutter
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b beta _flutter
-          echo "::add-path::${GITHUB_WORKSPACE}/_flutter/bin"
+          echo "${GITHUB_WORKSPACE}/_flutter/bin" >> ${GITHUB_PATH}
 
       - name: Install
         run: |
@@ -970,7 +976,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
 
@@ -1039,17 +1045,29 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/Publish_build
+            .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
       - name: Setup JohnSundell/Publish
         run: |
           cd ${HOME}
-          git clone --depth=1 https://github.com/JohnSundell/Publish.git
-          cd ./Publish
+          export PUBLISH_VERSION="0.7.0"
+          git clone https://github.com/JohnSundell/Publish.git
+          cd ./Publish && git checkout ${PUBLISH_VERSION}
+          mv ~/Publish_build .build || true
           swift build -c release
-          echo "::add-path::${HOME}/Publish/.build/release"
+          cp -r .build ~/Publish_build || true
+          echo "${HOME}/Publish/.build/release" >> ${GITHUB_PATH}
 
       - run: publish-cli generate
 
