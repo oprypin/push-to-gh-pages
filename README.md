@@ -28,7 +28,9 @@ Note that the `GITHUB_TOKEN` is **NOT** a personal access token.
 A GitHub Actions runner automatically creates a `GITHUB_TOKEN` secret to authenticate in your workflow.
 So, you can start to deploy immediately without any configuration.
 
-### Supported Tokens
+
+
+## Supported Tokens
 
 Three tokens are supported.
 
@@ -42,7 +44,9 @@ Notes: Actually, the `GITHUB_TOKEN` works for deploying to GitHub Pages but it h
 For the first deployment, we need to select the `gh-pages` branch or another branch on the repository settings tab.
 See [First Deployment with `GITHUB_TOKEN`](#%EF%B8%8F-first-deployment-with-github_token)
 
-### Supported Platforms
+
+
+## Supported Platforms
 
 All Actions runners: Linux (Ubuntu), macOS, and Windows are supported.
 
@@ -55,6 +59,14 @@ All Actions runners: Linux (Ubuntu), macOS, and Windows are supported.
 | windows-latest | ✅️ | (2) | ✅️ |
 
 2. WIP, See [Issue #87](https://github.com/peaceiris/actions-gh-pages/issues/87)
+
+
+
+## GitHub Enterprise Server Support
+
+✅️ GitHub Enterprise Server is supported above `2.22.6`.
+
+Note that the `GITHUB_TOKEN` that is created by the runner might not inherently have push/publish privileges on GHES. You might need to create/request a technical user with write permissions to your target repository.
 
 
 
@@ -270,9 +282,10 @@ The `exclude_assets` option supports glob patterns.
 
 ### ⭐️ Add CNAME file `cname`
 
-To add `CNAME` file, we can set the `cname` option.
+To add the `CNAME` file, we can set the `cname` option.
+Alternatively, put your `CNAME` file into your `publish_dir`. (e.g. `public/CNAME`)
 
-For more details about `CNAME`, read the official documentation: [Managing a custom domain for your GitHub Pages site - GitHub Help](https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site)
+For more details about the `CNAME` file, read the official documentation: [Managing a custom domain for your GitHub Pages site - GitHub Help](https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site)
 
 ```yaml
 - name: Deploy
@@ -319,7 +332,7 @@ For example:
 
 ### ⭐️ Keeping existing files `keep_files`
 
-By default, existing files in the publish branch are removed before adding the ones from publish dir. If you want the action to add new files but leave existing ones untouched, set the optional parameter `keep_files` to `true`.
+By default, existing files in the publish branch (or only in `destination_dir` if given) will be removed. If you want the action to add new files but leave existing ones untouched, set the optional parameter `keep_files` to `true`.
 
 Note that users who are using a Static Site Generator do not need this option in most cases. Please reconsider your project structure and building scripts, or use a built-in feature of a Static Site Generator before you enable this flag.
 
